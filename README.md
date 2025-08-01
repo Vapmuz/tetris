@@ -1,2 +1,2 @@
 # tetris
-my tetris
+my tetris is coool!
