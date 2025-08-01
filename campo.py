@@ -10,7 +10,7 @@ Questa classe crea un campo da gioco di dimensioni (r,c).
   come una sequenza di righe.
 
 """
-
+from pezzo import Pezzo, ESSE
 
 class Campo:
     """
@@ -97,3 +97,17 @@ class Campo:
             self.set_at(rc_p, pezzo.color)
 
         return True
+    def del_plot(self,rc, pezzo):
+        """
+        istanzia campo e pezzo
+        rimuovi il pezzo inserito trovando la sua abs_pos e mettendo nelle celle vuote dei ","
+        """
+        c =Campo()
+        p = Pezzo(pezzo)
+        abs_pos=p.positionate_piece(rc)
+        for xy in abs_pos:
+            x,y = xy    
+            c.pf[x][y]=','
+
+        
+
