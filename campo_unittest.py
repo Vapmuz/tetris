@@ -13,11 +13,11 @@ class TestCampo(unittest.TestCase):
         c.set_at((0,1), "blue")
         c.set_at((1,2), "red")
         
-        self.assertEquals( (",b,\n"
+        self.assertEqual( (",b,\n"
                             ",,r\n"), str(c))
-        self.assertEquals( "blue", c.val_at((0,1)))
-        self.assertEquals( "red", c.val_at((1,2)))
-        self.assertEquals( "", c.val_at((0,0)))
+        self.assertEqual( "blue", c.val_at((0,1)))
+        self.assertEqual( "red", c.val_at((1,2)))
+        self.assertEqual( "", c.val_at((0,0)))
         
 
 

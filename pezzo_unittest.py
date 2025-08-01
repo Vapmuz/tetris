@@ -17,3 +17,9 @@ class TestPezzo(unittest.TestCase):
     def test_rotate(self):
         p= Pezzo('vuoto','x', [(0,1),(0,2)])
         self.assertEqual([ (1,0) , (2,0) ],p.rotate().pos)
+    
+    def test_positionate(self):
+        p= Pezzo('vuoto','x', [(0,1),(0,2)])
+        self.assertEqual( p.positionate((0,1)) ,  (10 , 21))
+        self.assertEqual( p.positionate((-11,1)) ,  False)
+        self.assertEqual( p.positionate((1,-21)) ,  False)
