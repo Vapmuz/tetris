@@ -8,9 +8,8 @@ Questa classe crea un campo da gioco di dimensioni (r,c).
   ed impostate con 'set_at' passando una tupla (r,c)
 - con str() restituisce il campo da gioco
   come una sequenza di righe.
- 
+
 """
-from pezzo import Pezzo
 
 
 class Campo:
@@ -23,9 +22,9 @@ class Campo:
         self.rows = size_rows
 
         matrix = []
-        for i in range(size_rows):
+        for _ in range(size_rows):
             row = []
-            for j in range(size_cols):
+            for _ in range(size_cols):
                 row.append("")
             matrix.append(row)
 
@@ -36,7 +35,7 @@ class Campo:
         Legge un valore in posizione data (r,c).
 
         Se r o c sono oltre il valore massimo,
-        scoppia con un errore Index Out of Bounds        
+        scoppia con un errore Index Out of Bounds
         """
         r, c = rc
         return self.pf[r][c]
@@ -49,7 +48,7 @@ class Campo:
         self.pf[r][c] = v
 
     def valid_pos(self, rc):
-        """Controlla se una posizione è valida, ovvero compresa 
+        """Controlla se una posizione è valida, ovvero compresa
         tra (0,0) e (rows-1, cols-1)
         """
         r, c = rc
