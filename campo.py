@@ -10,6 +10,7 @@ Questa classe crea un campo da gioco di dimensioni (r,c).
   come una sequenza di righe.
  
 """
+from pezzo import Pezzo
 
 
 class Campo:
@@ -47,6 +48,17 @@ class Campo:
         r, c = rc
         self.pf[r][c] = v
 
+    def valid_pos(self, rc):
+        """Controlla se una posizione è valida, ovvero compresa 
+        tra (0,0) e (rows-1, cols-1)
+        """
+        r, c = rc
+        if (r < 0) or (r >= self.rows):
+            return False
+        if (c < 0) or (c >= self.cols):
+            return False
+        return True
+
     def __str__(self):
         """
         Stampa tutto il campo come un insieme di righe, separate dal pipe.
@@ -67,3 +79,22 @@ class Campo:
         if v == "":
             return ","
         return v[0]
+
+    def plot_at(self, rc, pezzo):
+        """Posiziona un pezzo nel campo avente il centro in (r,c).
+
+        Ritorna true se il disegno ha avuto successo (tutte le celle erano
+        valide e vuote) e false se erano occupate o inesistenti.
+        """
+        abs_pos = pezzo.positionate_piece(rc)
+
+        for rc_p in abs_pos:
+            if self.valid_pos(rc_p) is False:
+                return False
+            if self.val_at(rc_p) != "":
+                return False
+
+        for rc_p in abs_pos:
+            self.set_at(rc_p, pezzo.color)
+
+        return True
