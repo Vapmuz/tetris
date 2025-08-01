@@ -16,7 +16,7 @@ class Pezzo:
     # data una tupla di cordinate 
     # relative (x,y) genera una tupla ruotata di 90 gradi a destra
 
-    def rotpos(selfself,xy):  
+    def rotpos(self,xy):  
         x,y = xy
         a=0
         if x>0 and y==0:
@@ -58,5 +58,6 @@ class Pezzo:
 
 
     def positionate_piece(self):
-        lPosition=list(map(self.positionate(),self.pos))
+        lPosition=list(map(self.positionate,self.pos))
         self.pos=lPosition
+        return(lPosition)

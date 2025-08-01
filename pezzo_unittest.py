@@ -23,3 +23,7 @@ class TestPezzo(unittest.TestCase):
         self.assertEqual( p.positionate((0,1)) ,  (10 , 21))
         self.assertEqual( p.positionate((-11,1)) ,  False)
         self.assertEqual( p.positionate((1,-21)) ,  False)
+        
+    def test_positionate_piece(self):
+         p= Pezzo('vuoto','x', [(0,1),(0,2)])
+         self.assertEqual(p.positionate_piece(), [ (10, 21) , (10,22) ])
