@@ -97,17 +97,14 @@ class Campo:
             self.set_at(rc_p, pezzo.color)
 
         return True
-    def del_plot(self,rc, pezzo):
+    def del_plot(self, rc, pezzo):
         """
-        istanzia campo e pezzo
-        rimuovi il pezzo inserito trovando la sua abs_pos e mettendo nelle celle vuote dei ","
+        rimuovi il pezzo inserito trovando la sua abs_pos e sostituendo nelle celle con dei ","
+
+        primo problema: cosa dovrebbe ritornare?
+        Come implementare un test? su return(True)?
         """
-        c =Campo()
-        p = Pezzo(pezzo)
-        abs_pos=p.positionate_piece(rc)
-        for xy in abs_pos:
-            x,y = xy    
-            c.pf[x][y]=','
-
-        
-
+        abs_pos = pezzo.positionate_piece(rc)
+        for rc_p in abs_pos:
+            self.set_at(rc.p, "")       
+            return(True)

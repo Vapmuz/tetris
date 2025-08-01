@@ -81,3 +81,14 @@ class TestCampo(unittest.TestCase):
             ),
             str(c),
         )
+
+    def test_del_plot(self):
+        """
+        test per la funzione del_plot. In questa funzione si darà 
+        in pasto alla fuzione una matrice colorata 
+        
+        problemi: come implementarlo?
+        su cosa?
+        """
+        c=Campo()
+        self.assertEqual()
