@@ -22,10 +22,19 @@ class TestPezzo(unittest.TestCase):
         self.assertEqual((0, -1), p.rotpos((1, 0)), "rotazione tupla vuota")
         self.assertEqual((1, 0), p.rotpos((0, 1)), "rotazione tupla vuota")
 
+        self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
+        self.assertEqual((1, 0), p.rotpos((-1, 1)), "")
+
     def test_rotate(self):
         """test per la rotazione dei pezzi"""
         p = Pezzo("vuoto", "x", [(0, 1), (0, 2)])
         self.assertEqual([(1, 0), (2, 0)], p.rotate().pos)
+
+    def test_rotate_o(self):
+        """test per la rotazione della o"""
+        p = pp.o()
+        self.assertEqual([(1, 0), (2, 0)], p.rotate().pos)
+
 
     def test_positionate(self):
         """

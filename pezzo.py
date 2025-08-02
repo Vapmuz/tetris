@@ -1,4 +1,4 @@
-"""file che rachiude tutte le funzioni collegate ai pezzi"""
+"""file che racchiude tutte le funzioni collegate ai pezzi"""
 
 
 class Pezzo:
@@ -12,11 +12,11 @@ class Pezzo:
     def __str__(self):
         return f"{self.name}:l={len(self.pos)}"
 
-    # data una tupla di cordinate
-    # relative (x,y) genera una tupla ruotata di 90 gradi a destra
-
     def rotpos(self, xy):
-        """questa funzione dato un punto nello spazio lo ruota"""
+        """
+        Data una tupla di cordinate relative (x,y) genera 
+        una tupla ruotata di 90 gradi a destra
+        """
         x, y = xy
         if x > 0 and y == 0:
             return (y, -x)
