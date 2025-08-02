@@ -3,6 +3,10 @@ my tetris is coool!
 
 Let's do it.
 
+Rules:
+
+- https://tetris.wiki/Tetris_Guideline
+
 
 ## VS Code extensions
 
