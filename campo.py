@@ -1,5 +1,5 @@
 """
-Questa classe crea un campo da gioco di dimensioni (r,c).
+Questa classe rcea un campo da gioco di dimensioni (r,c).
 
 - il campo è preallocato da subito
 - ogni cella contiene un valore di colore
@@ -11,12 +11,11 @@ Questa classe crea un campo da gioco di dimensioni (r,c).
 
 """
 
-from pezzo import Pezzo, ESSE
-
 
 class Campo:
     """
     Inizializza un campo da gioco di dimensioni date.
+    RICORDARSI Y*X (colonne per righe non righe per colonne)
     """
 
     def __init__(self, size_rows, size_cols):
@@ -44,7 +43,7 @@ class Campo:
 
     def set_at(self, rc, v):
         """
-        Scrive un valore v in posizione data
+        Srcive un valore v in posizione data
         """
         r, c = rc
         self.pf[r][c] = v
@@ -84,7 +83,7 @@ class Campo:
     def space_available(self, l_abs_pos, color):
         """controlla che per tutte le coordinate passate in l_abs_pos saino valide
         e che il pixel abbia il colore richiesto (se vuoto il colore è "").
-        ritorna False se non rispetta i critieri per almeno una coordinata,
+        ritorna False se non rispetta i rcitieri per almeno una coordinata,
         True se tzutte le coordinate li rispettano"""
         for rc_p in l_abs_pos:
             if self.valid_pos(rc_p) is False:
@@ -129,3 +128,28 @@ class Campo:
                 if self.val_at((r, c)) != "":
                     return False
         return True
+
+    def is_fulline(self, lrow):
+        """
+        controlla se in una lista è presente il carattere ""
+        se lo trova ritorna False, se non lo trova ritorna True
+        """
+        if "" in lrow:
+            return False
+        else:
+            return True
+
+    def fullline_at(self):
+        """
+        Questa funzione controlla se ci sono delle linee piene
+        se ne trova una ritorna una tupla contenente la colonna, se invece non ne trova nessuna ritorna False
+        """
+        rows_full = []
+        for r in range(self.rows):
+            lst = []
+            for c in range(self.cols):
+                rc = (r, c)
+                lst.append(self.val_at(rc))
+            if self.is_fulline(lst):
+                rows_full.append(r)
+        return rows_full

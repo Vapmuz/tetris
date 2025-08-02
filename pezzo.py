@@ -62,16 +62,18 @@ class Pezzo:
 
 
 # riga gialla
-RIGA = Pezzo("-", "r", [(-1, 0), (0, 0), (1, 0), (2, 0)])
+I = Pezzo("-", "r", [(-1, 0), (0, 0), (1, 0), (2, 0)])
 # S: verde
-ESSE = Pezzo("s", "g", [(0, 0), (0, 1), (1, -1), (1, 0)])
+Z = Pezzo("s", "g", [(-1, 0), (0, 0), (0, -1), (1, -1)])
 # Z: rossa
-ZETA = Pezzo("z", "b", [(0, -1), (0, 0), (1, 0), (1, 1)])
+S = Pezzo("z", "b", [(1, 0), (0, 0), (0, -1), (-1, 1)])
 # L: arancione
-ELLE = Pezzo("l", "o", [(0, -1), (0, 0), (1, 0), (1, 1)])
+L = Pezzo("l", "o", [(0, -2), (0, 0), (0, -1), (1, 0),])
 # Gamma (L rovesciata): blu
-GAMM = Pezzo("rl", "b", [(0, -1), (0, 0), (1, 0), (1, 1)])
+S = Pezzo("rl", "b", [(0, -1), (0, 0), (1, 0), (1, 1)])
 # T: violetta
-TI = Pezzo("t", "p", [(0, -1), (0, 0), (1, 0), (1, 1)])
+T = Pezzo("t", "p", [(0, -1), (0, 0), (1, 0), (1, 1)])
 # Quadrato giallo
-QUAD = Pezzo("q", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
+O = Pezzo("q", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
+# pezzo speciale test colonne
+RIGA_TEST = Pezzo("-", "r", [(0, -1), (0, 0), (0, 1), (0, 2)])

@@ -1,7 +1,7 @@
 """file creato per unittest"""
 
 import unittest
-from pezzo import Pezzo, ESSE
+from pezzo import Pezzo, Z
 
 
 class TestPezzo(unittest.TestCase):
@@ -58,7 +58,7 @@ class TestPezzo(unittest.TestCase):
         Posizioni assolute per l'oggetto ESSE
         """
         self.assertEqual(
-            ESSE.positionate_piece((1, 1)),
+            Z.positionate_piece((1, 1)),
             [(1, 1), (1, 2), (2, 0), (2, 1)],
             "Posizione normale",
         )
