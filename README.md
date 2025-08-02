@@ -11,7 +11,8 @@ Let's do it.
 - Formatting: `autopep8`
 
 # TODO
-
+piccola modifica
+from piece import Pezzo
 - [x] Installare linter e formatter
 - [x] Pulire tutte le classi per avere 0 problemi di linting e formattarle
 - [ ] Cancellazione di un oggetto dal campo: tutti i pixel dell'oggetto sul campo devono essere del colore dell'oggetto; se no False e non modifica il campo
