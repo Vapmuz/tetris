@@ -67,7 +67,7 @@ class Campo:
 
         """
         s = ""
-        for r in range(self.rows):
+0        for r in range(self.rows):
             for c in range(self.cols):
                 s += self.printable_val_at((r, c))
             s += "|"

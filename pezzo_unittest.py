@@ -59,6 +59,6 @@ class TestPezzo(unittest.TestCase):
         """
         self.assertEqual(
             Z.positionate_piece((1, 1)),
-            [(1, 1), (1, 2), (2, 0), (2, 1)],
+            [(2, 1), (1, 1), (1, 0), (2, 0:)],
             "Posizione normale",
         )

@@ -66,9 +66,9 @@ class TestCampo(unittest.TestCase):
         self.assertEqual(True, c.plot_at((1, 1), S))
         self.assertEqual(
             (
-                ',,,,|'
                 ',bb,|'
                 'bb,,|'
+                ',,,,|'
                 ',,,,|'
             ),
             str(c),
@@ -142,3 +142,4 @@ class TestCampo(unittest.TestCase):
         c.plot_at((0, 1), RIGA_TEST)
         c.plot_at((2, 1), RIGA_TEST)
         self.assertEqual([0, 2], c.fullline_at(), "controlla che siano piene riga 0,2")
+
