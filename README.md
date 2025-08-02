@@ -1,5 +1,8 @@
+#Thanks dad! You rock!:>
+
+
 # tetris
-my tetris is coool!
+my tetris is coool! 
 
 Let's do it.
 
@@ -23,9 +26,10 @@ from piece import Pezzo
     - [x] continuare costruzione funzione del_plot
     - [x] aggiungere test funzione del_plot
 - [x] cambiare nomi tetromini
+    - [x] aggiornati bug derivanti dal cambio nome 
 - [ ] Compattazione righe: tutte le righe piene (di qualunque colore) vengono eliminate e i dati sopra vengono spostati in giù. La funzione mi dice quante righe ha compattato.
     - [x] fz ricerca riga piena
-    - [ ] fz dato campo restituisce una lista di righe piene
+    - [x] fz dato campo restituisce una lista di righe piene
     - [ ] fz compatta la riga (copia rihe superiori e le sposta in basso) 
 - [ ] Controllo pezzi "precotti": la forma deve essere quella attesa
 - [x] Creare oggetto Gioco + unittest

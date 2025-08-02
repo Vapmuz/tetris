@@ -2,7 +2,7 @@
 
 import unittest
 from campo import Campo
-from pezzo import S, RIGA_TEST
+from pezzo import S, RIGA_TEST, I, Z, L, J, T, O
 
 
 class TestCampo(unittest.TestCase):
@@ -65,12 +65,7 @@ class TestCampo(unittest.TestCase):
         c = Campo(4, 4)
         self.assertEqual(True, c.plot_at((1, 1), S))
         self.assertEqual(
-            (
-                ',bb,|'
-                'bb,,|'
-                ',,,,|'
-                ',,,,|'
-            ),
+            (",bb,|" "bb,,|" ",,,,|" ",,,,|"),
             str(c),
         )
         # lo ridisegno allo steso posto - non lo fa
@@ -81,9 +76,9 @@ class TestCampo(unittest.TestCase):
         # Il campo rimane immutato
         self.assertEqual(
             (
-                ",,,,|"  #
-                ",gg,|"
-                "gg,,|"
+                ",bb,|"  #
+                "bb,,|"
+                ",,,,|"
                 ",,,,|"
             ),
             str(c),
@@ -113,9 +108,9 @@ class TestCampo(unittest.TestCase):
         self.assertEqual(
             (
                 ",,,,|"  #
+                ",,bb|"
+                ",bb,|"
                 ",,,,|"
-                ",gg,|"
-                "gg,,|"
             ),
             str(c),
         )
@@ -143,3 +138,31 @@ class TestCampo(unittest.TestCase):
         c.plot_at((2, 1), RIGA_TEST)
         self.assertEqual([0, 2], c.fullline_at(), "controlla che siano piene riga 0,2")
 
+
+def print_piece():
+    """
+    funzione che disegna tutti i pezzi
+    """
+    c = Campo(6, 6)
+    c.plot_at((2, 2), I)
+    c.__str__()
+    c.unplot_at((2, 2), I)
+    c.plot_at((2, 2), Z)
+    c.__str__()
+    c.unplot_at((2, 2), Z)
+    c.plot_at((2, 2), S)
+    c.__str__()
+    c.unplot_at((2, 2), S)
+    c.plot_at((2, 2), L)
+    c.__str__()
+    c.unplot_at((2, 2), L)
+    c.plot_at((2, 2), J)
+    c.__str__()
+    c.unplot_at((2, 2), J)
+    c.plot_at((2, 2), T)
+    c.__str__()
+    c.unplot_at((2, 2), T)
+    c.plot_at((2, 2), O)
+    c.__str__()
+    c.unplot_at((2, 2), O)
+# end of the file

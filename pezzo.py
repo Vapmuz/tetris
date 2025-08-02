@@ -62,17 +62,17 @@ class Pezzo:
 
 
 # riga gialla
-I = Pezzo("-", "r", [(1, 0), (0, 0), (0, -1), (0, -2)])
+I = Pezzo("-", "r", [(0, 1), (0, 0), (0, -1), (0, -2)])
 # S: verde
-Z = Pezzo("s", "g", [(-1, 0), (0, 0), (0, 1), (-1, 1)])
-# Z: rossa
+Z = Pezzo("s", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
+# Z: rossa (cambiare)
 S = Pezzo("z", "b", [(0, -1), (0, 0), (-1, 0), (-1, 1)])
 # L: arancione
-L = Pezzo("l", "o", [(0, 1), (0, 0), (0, -1), (-1, -1),])
+L = Pezzo("l", "o", [(1, 0), (0, 0), (2, 0), (2, 1),])
 # Gamma (L rovesciata): blu
-J = Pezzo("rl", "b", [(0, 1), (0, 0), (0, -1), (-1, 1)])
+J = Pezzo("rl", "b", [(1, 0), (0, 0), (2, 0), (2, -1)])
 # T: violetta
-T = Pezzo("t", "p", [(0, 1), (0, 0), (0, -1), (-1, 0)])
+T = Pezzo("t", "p", [(0, 1), (0, 0), (0, -1), (1, 0)])
 # Quadrato giallo
 O = Pezzo("q", "g", [(0, 1), (0, 0), (-1, 0), (-1, 1)])
 # pezzo speciale test colonne

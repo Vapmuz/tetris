@@ -69,7 +69,7 @@ class Campo:
 
         """
         s = ""
-0        for r in range(self.rows):
+        for r in range(self.rows):
             for c in range(self.cols):
                 s += self.printable_val_at((r, c))
             s += "|"
@@ -162,7 +162,7 @@ class Campo:
     def fullline_at(self):
         """
         Questa funzione controlla se ci sono delle linee piene
-        se ne trova una ritorna una tupla contenente la colonna, 
+        se ne trova una ritorna una tupla contenente la colonna,
         se invece non ne trova nessuna ritorna False
         """
         rows_full = []
@@ -174,3 +174,7 @@ class Campo:
             if self.is_fulline(lst):
                 rows_full.append(r)
         return rows_full
+    def compact_rows(self):
+        """
+        Compatta le righe vuote WORK IN PROGRESS
+        """
