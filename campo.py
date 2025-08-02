@@ -8,6 +8,8 @@ Questa classe rcea un campo da gioco di dimensioni (r,c).
   ed impostate con 'set_at' passando una tupla (r,c)
 - con str() restituisce il campo da gioco
   come una sequenza di righe.
+- con as_stdout stampa il campo per la versione stdout
+  del gioco
 
 """
 
@@ -79,6 +81,24 @@ class Campo:
         if v == "":
             return ","
         return v[0]
+
+    def as_stdout(self):
+        """Stampa il campo per display su stdout."""
+
+        def stdout_val_at(self, rc):
+            v = self.val_at(rc)
+            if v == "":
+                return " "
+            return v[0]
+
+        s = ""
+        title = "+" + ("-" * self.cols) + "+\n"
+        for r in range(self.rows):
+            s += "|"
+            for c in range(self.cols):
+                s += stdout_val_at(self, (r, c))
+            s += "|\n"
+        return "\n" + title + s + title
 
     def space_available(self, l_abs_pos, color):
         """controlla che per tutte le coordinate passate in l_abs_pos saino valide
