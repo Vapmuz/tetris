@@ -142,7 +142,8 @@ class Campo:
     def fullline_at(self):
         """
         Questa funzione controlla se ci sono delle linee piene
-        se ne trova una ritorna una tupla contenente la colonna, se invece non ne trova nessuna ritorna False
+        se ne trova una ritorna una tupla contenente la colonna, 
+        se invece non ne trova nessuna ritorna False
         """
         rows_full = []
         for r in range(self.rows):

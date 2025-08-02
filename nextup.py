@@ -1,12 +1,19 @@
 """
 Restituisce il prossimo pezzo, nella sua posizione base.
 
-- The Random Generator (also known as "random bag" or "7 bag") determines the sequence of tetrominoes during gameplay. One of each of the 7 tetrominoes are shuffled in a "bag", and are dealt out one by one. When the bag is empty, a new one is filled and shuffled.
-- Tetrominoes appear on the 21st and 22nd rows of the playfield, centered and rounded to the left when needed. They must start with their flat side down, and move down immediately after appearing.
+- The Random Generator (also known as "random bag" or "7 bag") 
+  determines the sequence of tetrominoes during gameplay. 
+  One of each of the 7 tetrominoes are shuffled in a "bag", 
+  and are dealt out one by one. When the bag is empty, a 
+  new one is filled and shuffled.
+- Tetrominoes appear on the 21st and 22nd rows of the playfield, 
+  centered and rounded to the left when needed. 
+  They must start with their flat side down, and move down 
+  immediately after appearing.
 
 """
 import random
-from pezzo import Pezzo, ESSE, ELLE
+from pezzo import S, L
 
 
 class Nextup:
@@ -32,7 +39,7 @@ class Nextup:
 
     def fill(self):
         """Aggiunge una bag di elementi alla mia coda."""
-        bag = [ESSE, ELLE]
+        bag = [S, L]
         random.shuffle(bag)
         for p in bag:
             self.queue.append(p)
