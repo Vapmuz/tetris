@@ -61,19 +61,37 @@ class Pezzo:
         return list(abs_pos_non_negative)
 
 
-# riga gialla
-I = Pezzo("-", "r", [(0, 1), (0, 0), (0, -1), (0, -2)])
-# S: verde
-Z = Pezzo("s", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
-# Z: rossa (cambiare)
-S = Pezzo("z", "b", [(0, -1), (0, 0), (-1, 0), (-1, 1)])
-# L: arancione
-L = Pezzo("l", "o", [(1, 0), (0, 0), (2, 0), (2, 1),])
-# Gamma (L rovesciata): blu
-J = Pezzo("rl", "b", [(1, 0), (0, 0), (2, 0), (2, -1)])
-# T: violetta
-T = Pezzo("t", "p", [(0, 1), (0, 0), (0, -1), (1, 0)])
-# Quadrato giallo
-O = Pezzo("q", "g", [(0, 1), (0, 0), (-1, 0), (-1, 1)])
-# pezzo speciale test colonne
-RIGA_TEST = Pezzo("-", "r", [(0, -1), (0, 0), (0, 1), (0, 2)])
+class Pezzi:
+    """Factory per i pezzi"""
+
+    def i(self):
+        """i: riga gialla"""
+        return Pezzo("i", "r", [(0, 1), (0, 0), (0, -1), (0, -2)])
+
+    def z(self):
+        """ Z: rossa (cambiare)"""
+        return Pezzo("z", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
+
+    def s(self):
+        """ S: verde"""
+        return Pezzo("s", "b", [(0, -1), (0, 0), (-1, 0), (-1, 1)])
+
+    def l(self):
+        """ L: arancione"""
+        return Pezzo("l", "o", [(1, 0), (0, 0), (2, 0), (2, 1),])
+
+    def j(self):
+        """ Gamma (L rovesciata): blu"""
+        return Pezzo("j", "b", [(1, 0), (0, 0), (2, 0), (2, -1)])
+
+    def t(self):
+        """ T: violetta"""
+        return Pezzo("t", "p", [(0, 1), (0, 0), (0, -1), (1, 0)])
+
+    def o(self):
+        """ Quadrato giallo"""
+        return Pezzo("o", "g", [(0, 1), (0, 0), (-1, 0), (-1, 1)])
+
+    def riga_test(self):
+        """ pezzo speciale test colonne"""
+        return Pezzo("-", "r", [(0, -1), (0, 0), (0, 1), (0, 2)])

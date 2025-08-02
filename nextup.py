@@ -13,7 +13,7 @@ Restituisce il prossimo pezzo, nella sua posizione base.
 
 """
 import random
-from pezzo import S, L
+from pezzo import Pezzi
 
 
 class Nextup:
@@ -39,7 +39,8 @@ class Nextup:
 
     def fill(self):
         """Aggiunge una bag di elementi alla mia coda."""
-        bag = [S, L]
+        pp = Pezzi()
+        bag = [pp.i(), pp.s(), pp.j(), pp.l(), pp.o(), pp.t(), pp.z()]
         random.shuffle(bag)
         for p in bag:
             self.queue.append(p)

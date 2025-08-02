@@ -2,7 +2,9 @@
 
 import unittest
 from campo import Campo
-from pezzo import S, RIGA_TEST, I, Z, L, J, T, O
+from pezzo import Pezzi
+
+pp = Pezzi()
 
 
 class TestCampo(unittest.TestCase):
@@ -12,10 +14,9 @@ class TestCampo(unittest.TestCase):
         """Istanzia l'oggetto e controlla sia tutto vuoto"""
         c = Campo(2, 3)
         self.assertEqual(
-            (
-                ",,,|"  #
-                ",,,|"
-            ),
+
+            ",,,|"
+            ",,,|",
             str(c),
         )
 
@@ -25,7 +26,8 @@ class TestCampo(unittest.TestCase):
         c.set_at((0, 1), "blue")
         c.set_at((1, 2), "red")
 
-        self.assertEqual((",b,|" ",,r|"), str(c))
+        self.assertEqual(",b,|"
+                         ",,r|", str(c))
         self.assertEqual("blue", c.val_at((0, 1)))
         self.assertEqual("red", c.val_at((1, 2)))
         self.assertEqual("", c.val_at((0, 0)))
@@ -34,7 +36,7 @@ class TestCampo(unittest.TestCase):
         """controlla che sia tutto vuoto oppure no"""
         c = Campo(4, 4)
         self.assertEqual(True, c.is_all_empty())
-        c.plot_at((1, 1), S)
+        c.plot_at((1, 1), pp.s())
         self.assertEqual(False, c.is_all_empty())
 
     def test_get_set_out_of_bounds(self):
@@ -63,24 +65,25 @@ class TestCampo(unittest.TestCase):
         Disegna l'oggetto se il campo è libero
         """
         c = Campo(4, 4)
-        self.assertEqual(True, c.plot_at((1, 1), S))
+        self.assertEqual(True, c.plot_at((1, 1), pp.s()))
         self.assertEqual(
-            (",bb,|" "bb,,|" ",,,,|" ",,,,|"),
+            ",bb,|"
+            "bb,,|"
+            ",,,,|"
+            ",,,,|",
             str(c),
         )
-        # lo ridisegno allo steso posto - non lo fa
-        self.assertEqual(False, c.plot_at((1, 1), S))
+        # lo ridisegno allo stesso posto - non lo fa
+        self.assertEqual(False, c.plot_at((1, 1), pp.s()))
         # anche se lo sposto in su di 1, non lo deve fare
-        self.assertEqual(False, c.plot_at((0, 1), S))
+        self.assertEqual(False, c.plot_at((0, 1), pp.s()))
 
         # Il campo rimane immutato
         self.assertEqual(
-            (
-                ",bb,|"  #
-                "bb,,|"
-                ",,,,|"
-                ",,,,|"
-            ),
+            ",bb,|"
+            "bb,,|"
+            ",,,,|"
+            ",,,,|",
             str(c),
         )
 
@@ -90,8 +93,8 @@ class TestCampo(unittest.TestCase):
         in pasto alla fuzione una matrice colorata
         """
         c = Campo(4, 4)
-        c.plot_at((1, 1), S)
-        self.assertEqual(True, c.unplot_at((1, 1), S))
+        c.plot_at((1, 1), pp.s())
+        self.assertEqual(True, c.unplot_at((1, 1), pp.s()))
         self.assertEqual(True, c.is_all_empty())
 
     def test_unplot_at_cancellazione(self):
@@ -100,23 +103,23 @@ class TestCampo(unittest.TestCase):
         in pasto alla fuzione una matrice colorata
         """
         c = Campo(4, 4)
-        c.plot_at((0, 1), S)
-        c.plot_at((2, 2), S)
+        c.plot_at((0, 1), pp.s())
+        c.plot_at((2, 2), pp.s())
 
-        self.assertEqual(False, c.unplot_at((1, 1), S), "non è pieno")
-        self.assertEqual(True, c.unplot_at((0, 1), S), "cancella il primo blocco")
+        self.assertEqual(False, c.unplot_at((1, 1), pp.s()), "non è pieno")
+        self.assertEqual(True, c.unplot_at((0, 1), pp.s()),
+                         "cancella il primo blocco")
         self.assertEqual(
-            (
-                ",,,,|"  #
-                ",,bb|"
-                ",bb,|"
-                ",,,,|"
-            ),
+            ",,,,|"  #
+            ",,bb|"
+            ",bb,|"
+            ",,,,|",
             str(c),
         )
 
-        self.assertEqual(False, c.unplot_at((1, 1), S), "non è pieno")
-        self.assertEqual(True, c.unplot_at((2, 2), S), "cancella il secondo")
+        self.assertEqual(False, c.unplot_at((1, 1), pp.s()), "non è pieno")
+        self.assertEqual(True, c.unplot_at(
+            (2, 2), pp.s()), "cancella il secondo")
         self.assertEqual(True, c.is_all_empty(), "campo vuoto")
 
     def test_fulline_at(self):
@@ -124,45 +127,97 @@ class TestCampo(unittest.TestCase):
         controlla se delle righe sono piene oppure no
         """
         c = Campo(3, 4)
-        self.assertEqual([], c.fullline_at(), "controlla che non ci siano linee piene")
+        self.assertEqual([], c.fullline_at(),
+                         "controlla che non ci siano linee piene")
 
-        c.plot_at((2, 1), RIGA_TEST)
-        self.assertEqual([2], c.fullline_at(), "controlla che la riga 2 sia piena ")
+        c.plot_at((2, 1), pp.riga_test())
+        self.assertEqual([2], c.fullline_at(),
+                         "controlla che la riga 2 sia piena ")
 
-        c.unplot_at((2, 1), RIGA_TEST)
-        c.plot_at((1, 1), RIGA_TEST)
-        self.assertEqual([1], c.fullline_at(), "controlla che la riga 1 sia piena ")
+        c.unplot_at((2, 1), pp.riga_test())
+        c.plot_at((1, 1), pp.riga_test())
+        self.assertEqual([1], c.fullline_at(),
+                         "controlla che la riga 1 sia piena ")
 
-        c.unplot_at((1, 1), RIGA_TEST)
-        c.plot_at((0, 1), RIGA_TEST)
-        c.plot_at((2, 1), RIGA_TEST)
-        self.assertEqual([0, 2], c.fullline_at(), "controlla che siano piene riga 0,2")
+        c.unplot_at((1, 1), pp.riga_test())
+        c.plot_at((0, 1), pp.riga_test())
+        c.plot_at((2, 1), pp.riga_test())
+        self.assertEqual([0, 2], c.fullline_at(),
+                         "controlla che siano piene riga 0,2")
+
+    def test_pezzi_predefiniti(self):
+        """
+        funzione che disegna tutti i pezzi
+        """
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.s())
+        self.assertEqual(
+            ",bb,|"
+            "bb,,|"
+            ",,,,|"
+            ",,,,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.z())
+        self.assertEqual(
+            ",,,,|"
+            "gg,,|"
+            ",gg,|"
+            ",,,,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((0, 2), pp.i())
+        self.assertEqual(
+            "rrrr|"
+            ",,,,|"
+            ",,,,|"
+            ",,,,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.j())
+        self.assertEqual(
+            ",,,,|"
+            ",b,,|"
+            ",b,,|"
+            "bb,,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.l())
+        self.assertEqual(
+            ",,,,|"
+            ",o,,|"
+            ",o,,|"
+            ",oo,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.t())
+        self.assertEqual(
+            ",,,,|"
+            "ppp,|"
+            ",p,,|"
+            ",,,,|",
+            str(c),
+        )
+
+        c = Campo(4, 4)
+        c.plot_at((1, 1), pp.o())
+        self.assertEqual(
+            ",gg,|"
+            ",gg,|"
+            ",,,,|"
+            ",,,,|",
+            str(c),
+        )
 
 
-def print_piece():
-    """
-    funzione che disegna tutti i pezzi
-    """
-    c = Campo(6, 6)
-    c.plot_at((2, 2), I)
-    c.__str__()
-    c.unplot_at((2, 2), I)
-    c.plot_at((2, 2), Z)
-    c.__str__()
-    c.unplot_at((2, 2), Z)
-    c.plot_at((2, 2), S)
-    c.__str__()
-    c.unplot_at((2, 2), S)
-    c.plot_at((2, 2), L)
-    c.__str__()
-    c.unplot_at((2, 2), L)
-    c.plot_at((2, 2), J)
-    c.__str__()
-    c.unplot_at((2, 2), J)
-    c.plot_at((2, 2), T)
-    c.__str__()
-    c.unplot_at((2, 2), T)
-    c.plot_at((2, 2), O)
-    c.__str__()
-    c.unplot_at((2, 2), O)
 # end of the file

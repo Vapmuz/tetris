@@ -48,7 +48,7 @@ class TestNextup(unittest.TestCase):
     def test_elementi_unici(self):
         """Sui primi 7 elementi, ho 7 elementi unici"""
         n = Nextup()
-        n_uniques = 2
+        n_uniques = 7
         items = []
         for _ in range(n_uniques):
             items.append(n.pop())

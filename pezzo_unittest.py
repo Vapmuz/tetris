@@ -1,8 +1,9 @@
 """file creato per unittest"""
 
 import unittest
-from pezzo import Pezzo, S
+from pezzo import Pezzo, Pezzi
 
+pp = Pezzi()
 
 class TestPezzo(unittest.TestCase):
     """test per il file pezzo.py"""
@@ -58,7 +59,7 @@ class TestPezzo(unittest.TestCase):
         Posizioni assolute per l'oggetto ESSE
         """
         self.assertEqual(
-            S.positionate_piece((1, 1)),
+            pp.s().positionate_piece((1, 1)),
             [(1, 0), (1,1), (0, 1), (0, 2) ],
             "Posizione normale",
         )
