@@ -10,7 +10,9 @@ Questa classe crea un campo da gioco di dimensioni (r,c).
   come una sequenza di righe.
 
 """
+
 from pezzo import Pezzo, ESSE
+
 
 class Campo:
     """
@@ -79,6 +81,18 @@ class Campo:
             return ","
         return v[0]
 
+    def space_available(self, l_abs_pos, color):
+        """controlla che per tutte le coordinate passate in l_abs_pos saino valide
+        e che il pixel abbia il colore richiesto (se vuoto il colore è "").
+        ritorna False se non rispetta i critieri per almeno una coordinata,
+        True se tzutte le coordinate li rispettano"""
+        for rc_p in l_abs_pos:
+            if self.valid_pos(rc_p) is False:
+                return False
+            if self.val_at(rc_p) != color:
+                return False
+        return True
+
     def plot_at(self, rc, pezzo):
         """Posiziona un pezzo nel campo avente il centro in (r,c).
 
@@ -86,25 +100,32 @@ class Campo:
         valide e vuote) e false se erano occupate o inesistenti.
         """
         abs_pos = pezzo.positionate_piece(rc)
-
-        for rc_p in abs_pos:
-            if self.valid_pos(rc_p) is False:
-                return False
-            if self.val_at(rc_p) != "":
-                return False
-
+        if self.space_available(abs_pos, "") is False:
+            return False
         for rc_p in abs_pos:
             self.set_at(rc_p, pezzo.color)
-
         return True
-    def del_plot(self, rc, pezzo):
+
+    def unplot_at(self, rc, pezzo):
         """
         rimuovi il pezzo inserito trovando la sua abs_pos e sostituendo nelle celle con dei ","
-
-        primo problema: cosa dovrebbe ritornare?
-        Come implementare un test? su return(True)?
+        ritorna: true se la cancellazione ha avuto successo
+        false se non ha vuto successo ovvero: i pixel non erano dewl colore richiesto oppure
+        erano fuori dal campo di gioco.
         """
         abs_pos = pezzo.positionate_piece(rc)
+        if self.space_available(abs_pos, pezzo.color) is False:
+            return False
         for rc_p in abs_pos:
-            self.set_at(rc.p, "")       
-            return(True)
+            self.set_at(rc_p, "")
+        return True
+
+    def is_all_empty(self):
+        """controlla che tutte le celle del campo siano vuote
+        restituisce False se almeno una cella è piena
+        restituisce True se tutte so vuote"""
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if self.val_at((r, c)) != "":
+                    return False
+        return True

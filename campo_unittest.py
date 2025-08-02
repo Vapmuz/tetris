@@ -30,6 +30,13 @@ class TestCampo(unittest.TestCase):
         self.assertEqual("red", c.val_at((1, 2)))
         self.assertEqual("", c.val_at((0, 0)))
 
+    def test_is_all_empty(self):
+        """controlla che sia tutto vuoto oppure no"""
+        c = Campo(4, 4)
+        self.assertEqual(True, c.is_all_empty())
+        c.plot_at((1, 1), ESSE)
+        self.assertEqual(False, c.is_all_empty())
+
     def test_get_set_out_of_bounds(self):
         """
         Controlla che si abbia errore leggendo e
@@ -82,13 +89,37 @@ class TestCampo(unittest.TestCase):
             str(c),
         )
 
-    def test_del_plot(self):
+    def test_unplot_at(self):
         """
-        test per la funzione del_plot. In questa funzione si darà 
-        in pasto alla fuzione una matrice colorata 
-        
-        problemi: come implementarlo?
-        su cosa?
+        test per la funzione del_plot. In questa funzione si darà
+        in pasto alla fuzione una matrice colorata
         """
-        c=Campo()
-        self.assertEqual()
+        c = Campo(4, 4)
+        c.plot_at((1, 1), ESSE)
+        self.assertEqual(True, c.unplot_at((1, 1), ESSE))
+        self.assertEqual(True, c.is_all_empty())
+
+    def test_unplot_at_cancellazione(self):
+        """
+        test per la funzione del_plot. In questa funzione si darà
+        in pasto alla fuzione una matrice colorata
+        """
+        c = Campo(4, 4)
+        c.plot_at((0, 1), ESSE)
+        c.plot_at((2, 2), ESSE)
+
+        self.assertEqual(False, c.unplot_at((1, 1), ESSE), "non è pieno")
+        self.assertEqual(True, c.unplot_at((0, 1), ESSE), "cancella il primo blocco")
+        self.assertEqual(
+            (
+                ",,,,|"  #
+                ",,,,|"
+                ",,gg|"
+                ",gg,|"
+            ),
+            str(c),
+        )
+
+        self.assertEqual(False, c.unplot_at((1, 1), ESSE), "non è pieno")
+        self.assertEqual(True, c.unplot_at((2, 2), ESSE), "cancella il secondo")
+        self.assertEqual(True, c.is_all_empty(), "campo vuoto")
