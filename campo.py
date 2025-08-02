@@ -92,11 +92,11 @@ class Campo:
             return v[0]
 
         s = ""
-        title = "+" + ("-" * self.cols) + "+\n"
+        title = "+" + ("-" * self.cols * 2) + "+\n"
         for r in range(self.rows):
             s += "|"
             for c in range(self.cols):
-                s += stdout_val_at(self, (r, c))
+                s += stdout_val_at(self, (r, c)) * 2
             s += "|\n"
         return "\n" + title + s + title
 

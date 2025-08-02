@@ -24,6 +24,10 @@ class Gioco:
         self.lines = 0
         self.pf = Campo(20, 10)
         self.nextup = Nextup()
+        self.pezzo = self.nextup.pop()
+        # centrato in qualche modo
+        self.r = 2
+        self.c = 4
 
     def __str__(self):
         """
@@ -34,10 +38,10 @@ class Gioco:
         - score: {self.score} / lines: {self.lines} 
         - pezzi: {self.nextup.pops}
         - nextup: {self.nextup}
+        - pezzo attivo: {self.pezzo} ({self.r},{self.c})
+        -------------------------------------------------------
 
-        {self.pf.as_stdout()}
-
-        """)
+        """ + self.pf.as_stdout())
 
     def command(self, cmd):
         """
@@ -56,6 +60,20 @@ class Gioco:
         - aggiorna hiscore
         - determina se gioco finito
         """
+
+        self.pf.unplot_at((self.r, self.c), self.pezzo)
+
+        if cmd == "l":
+            self.c += -1
+        elif cmd == "r":
+            self.c += 1
+        elif cmd == "x":
+            self.pezzo.rotate()
+
+        self.r += 1
+
+        self.pf.plot_at((self.r, self.c), self.pezzo)
+
         return self
 
     def debugloop(self):
