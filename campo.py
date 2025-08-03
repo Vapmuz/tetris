@@ -33,6 +33,29 @@ class Campo:
 
         self.pf = matrix
 
+    @staticmethod
+    def build(image):
+        """
+        Costruisce rapidamente un campo per i test.
+
+        Passando una stringa come quella generata da 
+        str(Campo), costruisce un oggetto Campo con:
+        - le dimensioni inferite dal numero di righe e 
+          dalla lunghezza della prima riga
+        - dove ci sono altri caratteri che ",", il colore è
+          di quella lettera.
+
+        """
+        l_rows = list(filter(None, image.split("|")))
+        pf = Campo(len(l_rows), len(l_rows[0]))
+        for r in range(pf.rows):
+            for c in range(pf.cols):
+                v = l_rows[r][c]
+                if v != ",":
+                    pf.set_at((r, c), v)
+
+        return pf
+
     def val_at(self, rc):
         """
         Legge un valore in posizione data (r,c).
@@ -45,7 +68,7 @@ class Campo:
 
     def set_at(self, rc, v):
         """
-        Srcive un valore v in posizione data
+        Scrive un valore v in posizione data
         """
         r, c = rc
         self.pf[r][c] = v
@@ -81,6 +104,19 @@ class Campo:
         if v == "":
             return ","
         return v[0]
+
+    def as_bw(self, present="x"):
+        """Come la stampa str, ma tutti gli elementi vuoti sono
+        rappresentati da ',' e quelli pieni da 'x' (come settato 
+        in present) 
+        """
+        with_colors = str(self)
+        bw = ""
+        for _, v in enumerate(with_colors):
+            if v not in ["|", ","]:
+                v = present
+            bw += v
+        return bw
 
     def as_stdout(self):
         """Stampa il campo per display su stdout."""
