@@ -5,6 +5,7 @@ from pezzo import Pezzo, Pezzi
 
 pp = Pezzi()
 
+
 class TestPezzo(unittest.TestCase):
     """test per il file pezzo.py"""
 
@@ -15,26 +16,31 @@ class TestPezzo(unittest.TestCase):
         self.assertEqual("punto:l=1", str(p))
 
     def test_rotpos(self):
-        """test di funzionamento rotazione punti nello spazio"""
+        """
+        test di funzionamento rotazione punti nello spazio
+        """
         p = Pezzo("vuoto", "x", [(0, 0)])
-        self.assertEqual((0, 1), p.rotpos((-1, 0)), "rotazione tupla vuota")
-        self.assertEqual((-1, 0), p.rotpos((0, -1)), "rotazione tupla vuota")
-        self.assertEqual((0, -1), p.rotpos((1, 0)), "rotazione tupla vuota")
-        self.assertEqual((1, 0), p.rotpos((0, 1)), "rotazione tupla vuota")
-
+        self.assertEqual((1, 0), p.rotpos((-1, 0)), "rotazione tupla con un nr =0")
+        self.assertEqual((-1, 0), p.rotpos((1, 0)), "rotazione tupla con un nr = 0")
+        self.assertEqual((0, -1), p.rotpos((0, 1)), "rotazione tupla con un nr = 0")
+        self.assertEqual((1, 0), p.rotpos((-1, 0)), "rotazione tupla con un nr = 0")
+        self.assertEqual((1, 1), p.rotpos((-1, 1)), "rotazione tupla quarto quadrante")
+        self.assertEqual((1, -1), p.rotpos((1, 1)), "rotazione tupla primo quadrante")
+        self.assertEqual(
+            (-1, -1), p.rotpos((1, -1)), "rotazione tupla secondo quadrante"
+        )
+        self.assertEqual((-1, 1), p.rotpos((-1, -1)), "rotazione tupla terzo quadrante")
         self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
-        self.assertEqual((1, 0), p.rotpos((-1, 1)), "")
 
     def test_rotate(self):
         """test per la rotazione dei pezzi"""
         p = Pezzo("vuoto", "x", [(0, 1), (0, 2)])
-        self.assertEqual([(1, 0), (2, 0)], p.rotate().pos)
+        self.assertEqual([(0, -1), (0, -2)], p.rotate().pos)
 
     def test_rotate_o(self):
         """test per la rotazione della o"""
-        p = pp.o()
-        self.assertEqual([(1, 0), (2, 0)], p.rotate().pos)
-
+        p = Pezzo("o", "g", [(0, -1), (0, 0), (1, 0), (-1, -1)])
+        self.assertEqual([(0, 1), (0, 0), (-1, 0), (-1, 1)], p.rotate().pos)
 
     def test_positionate(self):
         """
@@ -69,8 +75,6 @@ class TestPezzo(unittest.TestCase):
         """
         self.assertEqual(
             pp.s().positionate_piece((1, 1)),
-            [(1, 0), (1,1), (0, 1), (0, 2) ],
+            [(1, 0), (1, 1), (0, 1), (0, 2)],
             "Posizione normale",
-        )
-
-#end of the file
+        )  # End-of-file (EOF)

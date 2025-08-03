@@ -12,19 +12,25 @@ class Pezzo:
     def __str__(self):
         return f"{self.name}:l={len(self.pos)}"
 
-    def rotpos(self, xy):
+    def rotpos(self, yx):
         """
-        Data una tupla di cordinate relative (x,y) genera 
-        una tupla ruotata di 90 gradi a destra
+        Data una tupla di cordinate relative (x,y) genera
+        una tupla ruotata di 90 gradi
+
+        approfondimento: tecnicamente non si ruotano, si specchiano le coordinate
         """
-        x, y = xy
-        if x > 0 and y == 0:
+        y, x = yx
+        if x == 0 or y == 0:
+            return (-y, -x)
+        if x >= 0 and y >= 0:
             return (y, -x)
-        if x == 0 and y < 0:
-            return (y, x)
-        if x < 0 and y == 0:
+        if x <= 0 and y >= 0:
+            return (-y, x)
+        if x <= 0 and y <= 0:
             return (y, -x)
-        if x == 0 and y > 0:
+        if x >= 0 and y <= 0:
+            return (-y, x)
+        else:
             return (y, x)
 
     def rotate(self):
@@ -69,29 +75,38 @@ class Pezzi:
         return Pezzo("i", "r", [(0, 1), (0, 0), (0, -1), (0, -2)])
 
     def z(self):
-        """ Z: rossa (cambiare)"""
+        """Z: rossa (cambiare)"""
         return Pezzo("z", "g", [(0, -1), (0, 0), (1, 0), (1, 1)])
 
     def s(self):
-        """ S: verde"""
+        """S: verde"""
         return Pezzo("s", "b", [(0, -1), (0, 0), (-1, 0), (-1, 1)])
 
     def l(self):
-        """ L: arancione"""
-        return Pezzo("l", "o", [(1, 0), (0, 0), (2, 0), (2, 1),])
+        """L: arancione"""
+        return Pezzo(
+            "l",
+            "o",
+            [
+                (1, 0),
+                (0, 0),
+                (2, 0),
+                (2, 1),
+            ],
+        )
 
     def j(self):
-        """ Gamma (L rovesciata): blu"""
+        """Gamma (L rovesciata): blu"""
         return Pezzo("j", "b", [(1, 0), (0, 0), (2, 0), (2, -1)])
 
     def t(self):
-        """ T: violetta"""
+        """T: violetta"""
         return Pezzo("t", "p", [(0, 1), (0, 0), (0, -1), (1, 0)])
 
     def o(self):
-        """ Quadrato giallo"""
+        """Quadrato giallo"""
         return Pezzo("o", "g", [(0, 1), (0, 0), (-1, 0), (-1, 1)])
 
     def riga_test(self):
-        """ pezzo speciale test colonne"""
+        """pezzo speciale test colonne"""
         return Pezzo("-", "r", [(0, -1), (0, 0), (0, 1), (0, 2)])
