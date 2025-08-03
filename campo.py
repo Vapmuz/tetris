@@ -162,8 +162,8 @@ class Campo:
     def fullline_at(self):
         """
         Questa funzione controlla se ci sono delle linee piene
-        se ne trova una ritorna una tupla contenente la colonna,
-        se invece non ne trova nessuna ritorna False
+        se ne trova una ritorna una lista contenente gli indici delle righe in ordine crescente,
+        se invece non ne trova nessuna ritorna []
         """
         rows_full = []
         for r in range(self.rows):
@@ -174,7 +174,16 @@ class Campo:
             if self.is_fulline(lst):
                 rows_full.append(r)
         return rows_full
+
     def compact_rows(self):
         """
-        Compatta le righe vuote WORK IN PROGRESS
+        Compatta le righe vuote, se riceve [] allora non fa nulla, se riceve una lista allora compatta lista
         """
+        l_rows_to_delete = self.fullline_at()
+        for r_to_delete in l_rows_to_delete:
+            for r in range(r_to_delete - 1, -1, -1):
+                for c in range(self.cols):
+                    v = self.val_at((r, c))
+                    self.set_at((r + 1, c), v)
+            for c_zero in range(self.cols):
+                self.set_at((0, c_zero), "")

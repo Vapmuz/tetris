@@ -33,8 +33,9 @@ from piece import Pezzo
     - [ ] fz compatta la riga (copia rihe superiori e le sposta in basso) 
 - [ ] Controllo pezzi "precotti": la forma deve essere quella attesa
 - [x] Creare oggetto Gioco + unittest
-- [ ] Rotpos non funziona
-
+- [x] Rotpos non funziona
+    - []sistemare Rotpos
+- [ ]test compattatore
 
 
 
