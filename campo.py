@@ -148,6 +148,13 @@ class Campo:
                 return False
         return True
 
+    def can_plot_at(self, rc, pezzo):
+        """Controlla se un pezzo POTREBBE essere disegnato 
+        nella posizione data.
+        Ritorna True o False"""
+        abs_pos = pezzo.positionate_piece(rc)
+        return self.space_available(abs_pos, "")
+
     def plot_at(self, rc, pezzo):
         """Posiziona un pezzo nel campo avente il centro in (r,c).
 
@@ -213,7 +220,9 @@ class Campo:
 
     def compact_rows(self):
         """
-        Compatta le righe vuote, se riceve [] allora non fa nulla, se riceve una lista allora compatta lista
+        Compatta le righe vuote, se riceve [] allora non fa nulla, 
+        se riceve una lista allora compatta lista.
+        Ritorna il numero di righe compattate.
         """
         l_rows_to_delete = self.fullline_at()
         for r_to_delete in l_rows_to_delete:
@@ -223,3 +232,4 @@ class Campo:
                     self.set_at((r + 1, c), v)
             for c_zero in range(self.cols):
                 self.set_at((0, c_zero), "")
+        return len(l_rows_to_delete)

@@ -26,9 +26,9 @@ class Gioco:
         self.nextup = Nextup()
         self.pezzo = self.nextup.pop()
         # centrato in qualche modo
-        self.r = 2
+        self.r = -1
         self.c = 4
-
+        
     def __str__(self):
         """
         Stampa lo stato del gioco.
@@ -41,7 +41,7 @@ class Gioco:
         - pezzo attivo: {self.pezzo} ({self.r},{self.c})
         -------------------------------------------------------
 
-        """ + self.pf.as_stdout())
+        """) + self.pf.as_stdout()
 
     def command(self, cmd):
         """
@@ -65,14 +65,35 @@ class Gioco:
 
         if cmd == "l":
             self.c += -1
+            if not self.pf.can_plot_at((self.r, self.c), self.pezzo):
+                self.c += 1
+
         elif cmd == "r":
             self.c += 1
+            if not self.pf.can_plot_at((self.r, self.c), self.pezzo):
+                self.c += -1
+
         elif cmd == "x":
             self.pezzo.rotate()
+            if not self.pf.can_plot_at((self.r, self.c), self.pezzo):
+                self.pezzo.unrotate()
 
         self.r += 1
+        if self.pf.can_plot_at((self.r, self.c), self.pezzo):
+            self.pf.plot_at((self.r, self.c), self.pezzo)
+        else:
+            plotted = self.pf.plot_at((self.r-1, self.c), self.pezzo)
+            if not plotted:
+                # ferma il gioco
+                self.playing = False
 
-        self.pf.plot_at((self.r, self.c), self.pezzo)
+            # controlla le righe complete
+            n_rows_compacted = self.pf.compact_rows()
+            self.lines += n_rows_compacted
+            self.score += 1 + (10 * (n_rows_compacted ** 2))
+            self.pezzo = self.nextup.pop()
+            self.r = -1
+            self.c = 4
 
         return self
 
@@ -80,13 +101,21 @@ class Gioco:
         """Una versione minima del gioco che funziona a tastiera."""
         while self.playing is True:
             print(str(self))
-            cmd = input("l r x:")
-            if cmd in ['l', 'r', 'x']:
+            cmd = input("a:< s:> l:x ... ")
+            if cmd in ['a', 's', 'l']:
+                if cmd == 'a':
+                    cmd = "l"
+                elif cmd == "s":
+                    cmd = "r"
+                else:
+                    cmd = "x"
                 self.command(cmd)
+
             else:
                 print("Comando sconosciuto")
                 self.command("")
             self.iterations += 1
+        print("==== Bye Bye!! ====")
 
 
 # Questo blocco si esegue solo quando il file viene eseguito direttamente

@@ -34,9 +34,16 @@ class Pezzo:
             return (y, x)
 
     def rotate(self):
-        """questa funzione ruota un pezzo"""
+        """questa funzione ruota un pezzo a dx di 90'"""
         l_rotpos = list(map(self.rotpos, self.pos))
         self.pos = l_rotpos
+        return self
+
+    def unrotate(self):
+        """questa funzione ruota un pezzo a sx di 90' facendo 3 rotazioni a dx"""
+        self.rotate()
+        self.rotate()
+        self.rotate()
         return self
 
     def positionate(self, xy, rc):

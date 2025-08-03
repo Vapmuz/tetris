@@ -42,6 +42,15 @@ class TestPezzo(unittest.TestCase):
         p = Pezzo("o", "g", [(0, -1), (0, 0), (1, 0), (-1, -1)])
         self.assertEqual([(0, 1), (0, 0), (-1, 0), (-1, 1)], p.rotate().pos)
 
+    def test_unrotate(self):
+        """test per la contro-rotazione dei pezzi"""
+        p = Pezzo("vuoto", "x", [(0, 1), (0, 2)])
+        p.rotate()
+        p.unrotate()
+        self.assertEqual([(0, 1), (0, 2)], p.pos)
+
+
+
     def test_positionate(self):
         """
         test per il posizionamento dei pezzi. Si controlla che data la psoizione relativa

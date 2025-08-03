@@ -35,12 +35,10 @@ class TestCampo(unittest.TestCase):
             "ab,c|"
 
         c = Campo.build(v)
-        self.assertEqual(",,x,|" \
-        "xx,x|", c.as_bw())
-        self.assertEqual(",,y,|" \
-        "yy,y|", c.as_bw(present='y'))
-
-
+        self.assertEqual(",,x,|"
+                         "xx,x|", c.as_bw())
+        self.assertEqual(",,y,|"
+                         "yy,y|", c.as_bw(present='y'))
 
     def test_get_set(self):
         """Lettura e scrittura valori"""
@@ -164,10 +162,15 @@ class TestCampo(unittest.TestCase):
         "test per la compattazione delle righe"
         c = Campo(4, 4)
         c.plot_at((2, 1), pp.riga_test())
-        c.compact_rows()
-        self.assertEqual(",,,,|" ",,,,|" ",,,,|" ",,,,|", str(c))
+        n_compacted = c.compact_rows()
+        self.assertEqual(1, n_compacted)
+        self.assertEqual(",,,,|"
+                         ",,,,|"
+                         ",,,,|"
+                         ",,,,|", str(c))
 
     def test_compact_rows_single(self):
+        "Campo complesso, 1 riga"
         c = Campo(5, 4)
         c.plot_at((2, 1), pp.riga_test())
         c.plot_at((1, 1), pp.s())
@@ -175,10 +178,12 @@ class TestCampo(unittest.TestCase):
         c.set_at((3, 0), "x")
         # c.compact_rows()
         self.assertEqual(",bb,|" "bb,,|" "rrrr|" "x,,,|" ",x,,|", str(c))
-        c.compact_rows()
+        n_compacted = c.compact_rows()
+        self.assertEqual(1, n_compacted)
         self.assertEqual(",,,,|" ",bb,|" "bb,,|" "x,,,|" ",x,,|", str(c))
 
     def test_compact_rows_more_rows(self):
+        "Campo complesso, 2 righe"
         c = Campo(5, 4)
         c.plot_at((2, 1), pp.riga_test())
         c.plot_at((1, 1), pp.s())
@@ -186,7 +191,8 @@ class TestCampo(unittest.TestCase):
         c.set_at((3, 0), "x")
         # c.compact_rows()
         self.assertEqual(",bb,|" "bb,,|" "rrrr|" "x,,,|" "rrrr|", str(c))
-        c.compact_rows()
+        n_compacted = c.compact_rows()
+        self.assertEqual(2, n_compacted)
         self.assertEqual(",,,,|" ",,,,|" ",bb,|" "bb,,|" "x,,,|", str(c))
 
     def test_pezzi_predefiniti(self):
