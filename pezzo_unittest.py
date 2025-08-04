@@ -21,29 +21,23 @@ class TestPezzo(unittest.TestCase):
         """
         p = Pezzo("vuoto", "x", [(0, 0)])
         self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
-        self.assertEqual((0,-1), p.rotpos((1, 0)),
-                         "rotazione tupla con un nr =0")
-        self.assertEqual((-1, -1), p.rotpos((1, -1)),
-                         "rotazione tupla con un nr = 0")
-        self.assertEqual((1, 0), p.rotpos((0, 1)),
-                         "rotazione tupla con un nr = 0")
-        self.assertEqual((-1, -2), p.rotpos((2, -1)),
-                         "rotazione tupla con un nr = 0")
-        self.assertEqual((-2, 1), p.rotpos((-1, -2)),
-                         "rotazione tupla quarto quadrante")
-        self.assertEqual((1, 2), p.rotpos((-2, 1)),
-                         "rotazione tupla primo quadrante")
+        self.assertEqual((0, -1), p.rotpos((1, 0)), "rotazione tupla con un nr =0")
+        self.assertEqual((-1, -1), p.rotpos((1, -1)), "rotazione tupla con un nr = 0")
+        self.assertEqual((1, 0), p.rotpos((0, 1)), "rotazione tupla con un nr = 0")
+        self.assertEqual((-1, -2), p.rotpos((2, -1)), "rotazione tupla con un nr = 0")
+        self.assertEqual(
+            (-2, 1), p.rotpos((-1, -2)), "rotazione tupla quarto quadrante"
+        )
+        self.assertEqual((1, 2), p.rotpos((-2, 1)), "rotazione tupla primo quadrante")
         self.assertEqual(
             (-1, -1), p.rotpos((1, -1)), "rotazione tupla secondo quadrante"
         )
-        self.assertEqual((-1, 1), p.rotpos((-1, -1)),
-                         "rotazione tupla terzo quadrante")
+        self.assertEqual((-1, 1), p.rotpos((-1, -1)), "rotazione tupla terzo quadrante")
         self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
-    
+
     def test_prova_rotazione(self):
         """test finto per vederela rotazione"""
 
-    
     def test_rotate(self):
         """test per la rotazione dei pezzi"""
         p = Pezzo("vuoto", "x", [(0, 1), (0, 2)])
@@ -85,8 +79,7 @@ class TestPezzo(unittest.TestCase):
             p.positionate_piece((3, 3)), [(3, 3), (3, 4), (4, 4)], "a (3,3)"
         )
         self.assertEqual(
-            p.positionate_piece(
-                (-1, 2)), [(0, 3)], "a (-1,2) rimane solo un pixel"
+            p.positionate_piece((-1, 2)), [(0, 3)], "a (-1,2) rimane solo un pixel"
         )
 
     def test_positionate_piece_esse(self):

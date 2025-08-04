@@ -4,6 +4,7 @@ import unittest
 from campo import Campo
 from pezzo import Pezzi
 from pezzo import Pezzo
+
 pp = Pezzi()
 
 
@@ -14,31 +15,25 @@ class TestCampo(unittest.TestCase):
         """Istanzia l'oggetto e controlla sia tutto vuoto"""
         c = Campo(2, 3)
         self.assertEqual(
-            ",,,|"
-            ",,,|",
+            ",,,|" ",,,|",
             str(c),
         )
 
     def test_builder(self):
         """Costruisce l'oggetto partendo da rappresentazione stringa"""
-        v = ",,x,|" \
-            "xy,z|"
+        v = ",,x,|" "xy,z|"
 
         c = Campo.build(v)
-        self.assertEqual((2, 4), (c.rows, c.cols),
-                         "Numero righe e colonne")
+        self.assertEqual((2, 4), (c.rows, c.cols), "Numero righe e colonne")
         self.assertEqual(v, str(c), "Come la rappresentazione iniziale")
 
     def test_as_bw(self):
         """Stampa l'oggetto monocolore"""
-        v = ",,q,|" \
-            "ab,c|"
+        v = ",,q,|" "ab,c|"
 
         c = Campo.build(v)
-        self.assertEqual(",,x,|"
-                         "xx,x|", c.as_bw())
-        self.assertEqual(",,y,|"
-                         "yy,y|", c.as_bw(present='y'))
+        self.assertEqual(",,x,|" "xx,x|", c.as_bw())
+        self.assertEqual(",,y,|" "yy,y|", c.as_bw(present="y"))
 
     def test_get_set(self):
         """Lettura e scrittura valori"""
@@ -120,8 +115,7 @@ class TestCampo(unittest.TestCase):
         c.plot_at((2, 2), pp.s())
 
         self.assertEqual(False, c.unplot_at((1, 1), pp.s()), "non è pieno")
-        self.assertEqual(True, c.unplot_at((0, 1), pp.s()),
-                         "cancella il primo blocco")
+        self.assertEqual(True, c.unplot_at((0, 1), pp.s()), "cancella il primo blocco")
         self.assertEqual(
             ",,,,|"  #
             ",,bb|"
@@ -131,8 +125,7 @@ class TestCampo(unittest.TestCase):
         )
 
         self.assertEqual(False, c.unplot_at((1, 1), pp.s()), "non è pieno")
-        self.assertEqual(True, c.unplot_at(
-            (2, 2), pp.s()), "cancella il secondo")
+        self.assertEqual(True, c.unplot_at((2, 2), pp.s()), "cancella il secondo")
         self.assertEqual(True, c.is_all_empty(), "campo vuoto")
 
     def test_fulline_at(self):
@@ -140,23 +133,19 @@ class TestCampo(unittest.TestCase):
         controlla se delle righe sono piene oppure no
         """
         c = Campo(3, 4)
-        self.assertEqual([], c.fullline_at(),
-                         "controlla che non ci siano linee piene")
+        self.assertEqual([], c.fullline_at(), "controlla che non ci siano linee piene")
 
         c.plot_at((2, 1), pp.riga_test())
-        self.assertEqual([2], c.fullline_at(),
-                         "controlla che la riga 2 sia piena ")
+        self.assertEqual([2], c.fullline_at(), "controlla che la riga 2 sia piena ")
 
         c.unplot_at((2, 1), pp.riga_test())
         c.plot_at((1, 1), pp.riga_test())
-        self.assertEqual([1], c.fullline_at(),
-                         "controlla che la riga 1 sia piena ")
+        self.assertEqual([1], c.fullline_at(), "controlla che la riga 1 sia piena ")
 
         c.unplot_at((1, 1), pp.riga_test())
         c.plot_at((0, 1), pp.riga_test())
         c.plot_at((2, 1), pp.riga_test())
-        self.assertEqual([0, 2], c.fullline_at(),
-                         "controlla che siano piene riga 0,2")
+        self.assertEqual([0, 2], c.fullline_at(), "controlla che siano piene riga 0,2")
 
     def test_compact_rows(self):
         "test per la compattazione delle righe"
@@ -164,10 +153,7 @@ class TestCampo(unittest.TestCase):
         c.plot_at((2, 1), pp.riga_test())
         n_compacted = c.compact_rows()
         self.assertEqual(1, n_compacted)
-        self.assertEqual(",,,,|"
-                         ",,,,|"
-                         ",,,,|"
-                         ",,,,|", str(c))
+        self.assertEqual(",,,,|" ",,,,|" ",,,,|" ",,,,|", str(c))
 
     def test_compact_rows_single(self):
         "Campo complesso, 1 riga"
@@ -247,25 +233,18 @@ class TestCampo(unittest.TestCase):
             ",gg,|" ",gg,|" ",,,,|" ",,,,|",
             str(c),
         )
-    
-    
-    def test_prova_rotazione(self):
-        """test finto per vedere la rotazione"""
-        
-        L=pp.o()
-        #L=Pezzo("x","x", [(0,0), (1,1), (2,1)])
-        for _ in range(4):
-            c_1= Campo(5,5)
-            c_1.plot_at((2,2), L)
-            print(L.pos)
-            print(c_1.as_stdout())
-            L.rotate()
-        self.assertEqual(0,1)
 
-       
-
-#
- 
+    def test_all_L_rotations(self):
+        """testa tutte le rotazioni del tetramino L"""
+        L = pp.l()
+        lst = [
+            ",,,,,|" ",,,,,|" ",,x,,|" ",,x,,|" ",,xx,|",
+            ",,,,,|" ",,,,,|" "xxx,,|" "x,,,,|" ",,,,,|",
+            ",xx,,|" ",,x,,|" ",,x,,|" ",,,,,|" ",,,,,|",
+            ",,,,,|" ",,,,x|" ",,xxx|" ",,,,,|" ",,,,,|",
+        ]
+        for x in range(4):
+            self.assertEqual(lst[x], Campo.return_piece_rotation(L))
 
 
 # end of the file

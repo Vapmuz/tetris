@@ -18,7 +18,7 @@ class Pezzo:
         una tupla ruotata di 90 gradi
 
         approfondimento: tecnicamente non si ruotano, si specchiano le coordinate
-        """  
+        """
         r, c = xy
         #if x == 0 or y == 0:
         #    return (-y, -x)
@@ -30,7 +30,7 @@ class Pezzo:
                 return((c, -r))
         else:
             if c>=0:
-                    return((c,-r))
+                return((c,-r))
             else:
                 return((c,-r))
 

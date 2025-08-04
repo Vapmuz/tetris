@@ -13,6 +13,8 @@ Questa classe rcea un campo da gioco di dimensioni (r,c).
 
 """
 
+from pezzo import Pezzo
+
 
 class Campo:
     """
@@ -38,9 +40,9 @@ class Campo:
         """
         Costruisce rapidamente un campo per i test.
 
-        Passando una stringa come quella generata da 
+        Passando una stringa come quella generata da
         str(Campo), costruisce un oggetto Campo con:
-        - le dimensioni inferite dal numero di righe e 
+        - le dimensioni inferite dal numero di righe e
           dalla lunghezza della prima riga
         - dove ci sono altri caratteri che ",", il colore è
           di quella lettera.
@@ -107,8 +109,8 @@ class Campo:
 
     def as_bw(self, present="x"):
         """Come la stampa str, ma tutti gli elementi vuoti sono
-        rappresentati da ',' e quelli pieni da 'x' (come settato 
-        in present) 
+        rappresentati da ',' e quelli pieni da 'x' (come settato
+        in present)
         """
         with_colors = str(self)
         bw = ""
@@ -149,7 +151,7 @@ class Campo:
         return True
 
     def can_plot_at(self, rc, pezzo):
-        """Controlla se un pezzo POTREBBE essere disegnato 
+        """Controlla se un pezzo POTREBBE essere disegnato
         nella posizione data.
         Ritorna True o False"""
         abs_pos = pezzo.positionate_piece(rc)
@@ -220,7 +222,7 @@ class Campo:
 
     def compact_rows(self):
         """
-        Compatta le righe vuote, se riceve [] allora non fa nulla, 
+        Compatta le righe vuote, se riceve [] allora non fa nulla,
         se riceve una lista allora compatta lista.
         Ritorna il numero di righe compattate.
         """
@@ -233,3 +235,12 @@ class Campo:
             for c_zero in range(self.cols):
                 self.set_at((0, c_zero), "")
         return len(l_rows_to_delete)
+
+    @staticmethod
+    def return_piece_rotation(piece):
+        """dato un determinato pezzo, lo ruota e ritorna il campo in bianco e nero"""
+        p = piece
+        c = Campo(5, 5)
+        c.plot_at((2, 2), piece)
+        Pezzo.rotate(p)
+        return c.as_bw()
