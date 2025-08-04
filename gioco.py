@@ -28,7 +28,7 @@ class Gioco:
         # centrato in qualche modo
         self.r = -1
         self.c = 4
-        
+
     def __str__(self):
         """
         Stampa lo stato del gioco.

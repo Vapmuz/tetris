@@ -20,16 +20,23 @@ class TestPezzo(unittest.TestCase):
         test di funzionamento rotazione punti nello spazio
         """
         p = Pezzo("vuoto", "x", [(0, 0)])
-        self.assertEqual((1, 0), p.rotpos((-1, 0)), "rotazione tupla con un nr =0")
-        self.assertEqual((-1, 0), p.rotpos((1, 0)), "rotazione tupla con un nr = 0")
-        self.assertEqual((0, -1), p.rotpos((0, 1)), "rotazione tupla con un nr = 0")
-        self.assertEqual((1, 0), p.rotpos((-1, 0)), "rotazione tupla con un nr = 0")
-        self.assertEqual((1, 1), p.rotpos((-1, 1)), "rotazione tupla quarto quadrante")
-        self.assertEqual((1, -1), p.rotpos((1, 1)), "rotazione tupla primo quadrante")
+        self.assertEqual((1, 0), p.rotpos((-1, 0)),
+                         "rotazione tupla con un nr =0")
+        self.assertEqual((-1, 0), p.rotpos((1, 0)),
+                         "rotazione tupla con un nr = 0")
+        self.assertEqual((0, -1), p.rotpos((0, 1)),
+                         "rotazione tupla con un nr = 0")
+        self.assertEqual((1, 0), p.rotpos((-1, 0)),
+                         "rotazione tupla con un nr = 0")
+        self.assertEqual((1, 1), p.rotpos((-1, 1)),
+                         "rotazione tupla quarto quadrante")
+        self.assertEqual((1, -1), p.rotpos((1, 1)),
+                         "rotazione tupla primo quadrante")
         self.assertEqual(
             (-1, -1), p.rotpos((1, -1)), "rotazione tupla secondo quadrante"
         )
-        self.assertEqual((-1, 1), p.rotpos((-1, -1)), "rotazione tupla terzo quadrante")
+        self.assertEqual((-1, 1), p.rotpos((-1, -1)),
+                         "rotazione tupla terzo quadrante")
         self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
 
     def test_rotate(self):
@@ -48,8 +55,6 @@ class TestPezzo(unittest.TestCase):
         p.rotate()
         p.unrotate()
         self.assertEqual([(0, 1), (0, 2)], p.pos)
-
-
 
     def test_positionate(self):
         """
@@ -75,7 +80,8 @@ class TestPezzo(unittest.TestCase):
             p.positionate_piece((3, 3)), [(3, 3), (3, 4), (4, 4)], "a (3,3)"
         )
         self.assertEqual(
-            p.positionate_piece((-1, 2)), [(0, 3)], "a (-1,2) rimane solo un pixel"
+            p.positionate_piece(
+                (-1, 2)), [(0, 3)], "a (-1,2) rimane solo un pixel"
         )
 
     def test_positionate_piece_esse(self):
