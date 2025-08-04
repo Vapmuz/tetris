@@ -12,29 +12,32 @@ class Pezzo:
     def __str__(self):
         return f"{self.name}:l={len(self.pos)}"
 
-    def rotpos(self, yx):
+    def rotpos(self, xy):
         """
         Data una tupla di cordinate relative (x,y) genera
         una tupla ruotata di 90 gradi
 
         approfondimento: tecnicamente non si ruotano, si specchiano le coordinate
-        """
-        y, x = yx
-        if x == 0 or y == 0:
-            return (-y, -x)
-        if x >= 0 and y >= 0:
-            return (y, -x)
-        if x <= 0 and y >= 0:
-            return (-y, x)
-        if x <= 0 and y <= 0:
-            return (y, -x)
-        if x >= 0 and y <= 0:
-            return (-y, x)
+        """  
+        r, c = xy
+        #if x == 0 or y == 0:
+        #    return (-y, -x)
+        if r>=0:
+
+            if c>=0:
+                return((c, -r))
+            else:
+                return((c, -r))
         else:
-            return (y, x)
+            if c>=0:
+                    return((c,-r))
+            else:
+                return((c,-r))
+
 
     def rotate(self):
-        """questa funzione ruota un pezzo a dx di 90'"""
+        """ruota un pezzo a dx di 90 gradi prendendo singolarmente la posizione 
+        di ogni blocco di un pezzo, restituisce una versione aggiornata della posizione"""
         l_rotpos = list(map(self.rotpos, self.pos))
         self.pos = l_rotpos
         return self

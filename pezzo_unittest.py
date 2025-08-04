@@ -20,17 +20,18 @@ class TestPezzo(unittest.TestCase):
         test di funzionamento rotazione punti nello spazio
         """
         p = Pezzo("vuoto", "x", [(0, 0)])
-        self.assertEqual((1, 0), p.rotpos((-1, 0)),
+        self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
+        self.assertEqual((0,-1), p.rotpos((1, 0)),
                          "rotazione tupla con un nr =0")
-        self.assertEqual((-1, 0), p.rotpos((1, 0)),
+        self.assertEqual((-1, -1), p.rotpos((1, -1)),
                          "rotazione tupla con un nr = 0")
-        self.assertEqual((0, -1), p.rotpos((0, 1)),
+        self.assertEqual((1, 0), p.rotpos((0, 1)),
                          "rotazione tupla con un nr = 0")
-        self.assertEqual((1, 0), p.rotpos((-1, 0)),
+        self.assertEqual((-1, -2), p.rotpos((2, -1)),
                          "rotazione tupla con un nr = 0")
-        self.assertEqual((1, 1), p.rotpos((-1, 1)),
+        self.assertEqual((-2, 1), p.rotpos((-1, -2)),
                          "rotazione tupla quarto quadrante")
-        self.assertEqual((1, -1), p.rotpos((1, 1)),
+        self.assertEqual((1, 2), p.rotpos((-2, 1)),
                          "rotazione tupla primo quadrante")
         self.assertEqual(
             (-1, -1), p.rotpos((1, -1)), "rotazione tupla secondo quadrante"
@@ -38,16 +39,20 @@ class TestPezzo(unittest.TestCase):
         self.assertEqual((-1, 1), p.rotpos((-1, -1)),
                          "rotazione tupla terzo quadrante")
         self.assertEqual((0, 0), p.rotpos((0, 0)), "(0,0)")
+    
+    def test_prova_rotazione(self):
+        """test finto per vederela rotazione"""
 
+    
     def test_rotate(self):
         """test per la rotazione dei pezzi"""
         p = Pezzo("vuoto", "x", [(0, 1), (0, 2)])
-        self.assertEqual([(0, -1), (0, -2)], p.rotate().pos)
+        self.assertEqual([(1, 0), (2, 0)], p.rotate().pos)
 
     def test_rotate_o(self):
         """test per la rotazione della o"""
         p = Pezzo("o", "g", [(0, -1), (0, 0), (1, 0), (-1, -1)])
-        self.assertEqual([(0, 1), (0, 0), (-1, 0), (-1, 1)], p.rotate().pos)
+        self.assertEqual([(-1, 0), (0, 0), (0, -1), (-1, 1)], p.rotate().pos)
 
     def test_unrotate(self):
         """test per la contro-rotazione dei pezzi"""

@@ -3,7 +3,7 @@
 import unittest
 from campo import Campo
 from pezzo import Pezzi
-
+from pezzo import Pezzo
 pp = Pezzi()
 
 
@@ -247,6 +247,25 @@ class TestCampo(unittest.TestCase):
             ",gg,|" ",gg,|" ",,,,|" ",,,,|",
             str(c),
         )
+    
+    
+    def test_prova_rotazione(self):
+        """test finto per vedere la rotazione"""
+        
+        L=pp.o()
+        #L=Pezzo("x","x", [(0,0), (1,1), (2,1)])
+        for _ in range(4):
+            c_1= Campo(5,5)
+            c_1.plot_at((2,2), L)
+            print(L.pos)
+            print(c_1.as_stdout())
+            L.rotate()
+        self.assertEqual(0,1)
+
+       
+
+#
+ 
 
 
 # end of the file
