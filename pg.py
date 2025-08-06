@@ -52,7 +52,6 @@ def run():
     gg = Gioco()
     pygame.init()
     screen = pygame.display.set_mode((1280,720))
-
     clock = pygame.time.Clock()
     font = pygame.font.Font('freesansbold.ttf', 20)
 
