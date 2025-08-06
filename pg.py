@@ -17,17 +17,16 @@ colors = {
 
 pixel_width = 10
 pixel_margin = 0
-playfield_offset_v = 100
-playfield_offset_h = 50
+playfield_offset_v = 250
+playfield_offset_h = 500
 
 
 def plot_playfield_box(screen):
     color = pygame.Color("gray")
 
-    coords =  (playfield_offset_h - pixel_margin , 
-               playfield_offset_v - pixel_margin, 
-               playfield_offset_h + 20 * pixel_width + pixel_margin , 
-               playfield_offset_v + 10 * pixel_width + pixel_margin )
+    coords =  (515, 
+               100, 
+                250,500)
     print( f"Box: {coords}")
 
     pygame.draw.rect( screen, color, coords)
@@ -37,10 +36,9 @@ def plot_playfield_box(screen):
 def plot_playfield(screen, r, c, v):
     color = pygame.Color(colors[v])
 
-    coords =  (c*pixel_width + playfield_offset_h , 
+    coords =  (c*pixel_width + playfield_offset_h+90 , 
                r*pixel_width+ playfield_offset_v, 
-               (c+1)*pixel_width - pixel_margin + playfield_offset_h, 
-               (r+1) * pixel_width - pixel_margin  + playfield_offset_v)
+               10,10)
     #print( f"({r},{c}) = {coords}")
 
     pygame.draw.rect( screen, color, coords)
@@ -79,7 +77,7 @@ def run():
         gg.command(cmd)
         gg.iterations += 1
 
-        screen.fill("black")
+        screen.fill("green")
         plot_playfield_box(screen)
 
         for r in range(20):
@@ -99,7 +97,7 @@ def run():
         # text surface object
         textRect = text.get_rect()
         # set the center of the rectangular object.
-        textRect.center = (200,20)
+        textRect.center = (playfield_offset_h+140,20)
 
 
         screen.blit(text, textRect)
@@ -112,7 +110,7 @@ def run():
         # Render the graphics here.
         # ...
 
-        pygame.time.wait(100)
+        pygame.time.wait(150)
         pygame.display.flip()  # Refresh on-screen display
         clock.tick(60)         # wait until next frame (at 60 FPS)
 

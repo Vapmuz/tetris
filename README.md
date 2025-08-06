@@ -30,12 +30,15 @@ from piece import Pezzo
 - [ ] Compattazione righe: tutte le righe piene (di qualunque colore) vengono eliminate e i dati sopra vengono spostati in giù. La funzione mi dice quante righe ha compattato.
     - [x] fz ricerca riga piena
     - [x] fz dato campo restituisce una lista di righe piene
-    - [ ] fz compatta la riga (copia rihe superiori e le sposta in basso) 
+    - [x] fz compatta la riga (copia rihe superiori e le sposta in basso) 
 - [ ] Controllo pezzi "precotti": la forma deve essere quella attesa
 - [x] Creare oggetto Gioco + unittest
 - [x] Rotpos non funziona
-    - []sistemare Rotpos
-- [ ]test compattatore
+    - [x]sistemare Rotpos
+- [x]test compattatore
+- [ ] trovati bug PG.py da sistemare
+
+
 
 
 
